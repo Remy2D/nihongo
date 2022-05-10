@@ -6,7 +6,7 @@ import * as KanaModel from './KanaModel.js'
 import {reset} from "./Reset";
 import {isKatakanaLoaded} from "./KanaLoad";
 import {kanaMatches} from "./KanaModel.js";
-import {addWrongAnswer, clearWrongAnswers, isWrongAnswer} from "./WrongAnswers.js";
+import {addWrongAnswer, isWrongAnswer} from "./WrongAnswers.js";
 
 const theme = {
     blue: {

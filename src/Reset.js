@@ -2,14 +2,16 @@ import {clearWrongAnswers} from "./WrongAnswers";
 import Button from 'react-bootstrap/Button'
 import {isKatakanaLoaded} from "./KanaLoad";
 import {setRandomCharacterSeed} from "./Question";
+import './Reset.css';
+import React from "react";
 
 function Reset() {
     return (
-        <Button variant="warning"
+        <Button className="Reset" variant="warning"
                 onClick={() => {
                     reset()
                 }}>
-            Reset
+            <img src="http://localhost:8069/Refresh_icon.svg" alt="Reset"/>
         </Button>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './TileGroup.css';
 import Reset from "./Reset";
 import Question from "./Question";
 import TileGroup from './TileGroup';
@@ -17,11 +18,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <header className="App-header">
-            <table>
+            <table className="Header-table">
                 <tbody>
                 <tr>
                     <td><Reset/></td>
                     <td><Question/></td>
+                    <td/>
+                    <td/>
+                    <td/>
                 </tr>
                 </tbody>
             </table>

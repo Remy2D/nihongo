@@ -7,8 +7,7 @@
     text-align: center;
     background-color: #282c34;
     min-height: 10vh;
-    vertical-align: top;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(10px + 3vmin);
     color: white;
 }
 
@@ -32,6 +31,12 @@
     vertical-align: top;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+.Header-table {
+    horiz-align: center;
+    table-layout: fixed;
+    width: 100%;
 }
 
 .TileGroup-link {
