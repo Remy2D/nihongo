@@ -3,8 +3,10 @@ import styled from "styled-components";
 
 import React from "react";
 import * as KanaModel from './KanaModel.js'
+import {reset} from "./Reset";
 import {isKatakanaLoaded} from "./KanaLoad";
 import {kanaMatches} from "./KanaModel.js";
+import {addWrongAnswer, clearWrongAnswers, isWrongAnswer} from "./WrongAnswers.js";
 
 const theme = {
     blue: {
@@ -66,8 +68,10 @@ function refreshButtons() {
 }
 
 function mapToButton(line) {
+    let themeName = isWrongAnswer(line) ? "pink" : "blue"
+
     return (
-        <Button theme="blue" onClick={e => clickMe(e)} value={line} key={line}>{line}</Button>
+        <Button theme={themeName} onClick={e => clickMe(e)} value={line} key={line}>{line}</Button>
     );
 }
 
@@ -77,9 +81,13 @@ function clickMe(button) {
 
     if (kanaMatches(kana, romaji)) {
         console.log("Match!: " + kana + "=" + romaji)
+        reset();
     } else {
+        addWrongAnswer(kana)
         console.log("Wrong: " + kana + " != " + romaji)
     }
+
+    window.location.reload(false);
 }
 
 

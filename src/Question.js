@@ -4,16 +4,32 @@ import {getKatakanaRomajiSet} from "./KanaModel";
 
 function Question() {
     if (isKatakanaLoaded()) {
-        return showRandomCharacter();
+
+        if (hasEmptySeed()) {
+            setRandomCharacterSeed();
+        }
+
+        return prepareDiv();
     }
 }
 
-function showRandomCharacter() {
+function prepareDiv() {
+    let character = localStorage.getItem(QUESTION_FIELD)
+    return (
+        <p className="Question">{character}</p>
+    )
+}
+
+const QUESTION_FIELD = "currentQuestion"
+
+export function setRandomCharacterSeed() {
     let romaji = getKatakanaRomajiSet();
 
-    return (
-        <p className="Question">{romaji[Math.floor((Math.random() * romaji.length))]}</p>
-    )
+    localStorage.setItem(QUESTION_FIELD, romaji[Math.floor((Math.random() * romaji.length))])
+}
+
+function hasEmptySeed() {
+    return localStorage.getItem(QUESTION_FIELD) === null
 }
 
 export default Question;
