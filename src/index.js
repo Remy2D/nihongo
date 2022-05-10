@@ -21,14 +21,23 @@ root.render(
             <table className="Header-table">
                 <tbody>
                 <tr>
-                    <td><Reset/></td>
-                    <td><Question/></td>
                     <td/>
-                    <td/>
+                    <td>
+                        <table className="Header-table">
+                            <tbody>
+                            <tr>
+                                <td><Reset/></td>
+                                <td><Question/></td>
+                                <td/>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
                     <td/>
                 </tr>
                 </tbody>
             </table>
+
             <TileGroup/>
         </header>
     </React.StrictMode>

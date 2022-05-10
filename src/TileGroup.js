@@ -26,8 +26,9 @@ const Button = styled.button`
   border-radius: 8px;
   outline: 0;
   text-transform: uppercase;
-  margin: 10px 10px;
+  margin: 5px 5px;
   cursor: pointer;
+  font-size: calc(10px + 2vmin);
   box-shadow: 0px 1px 1px darkgray;
   transition: ease background-color 250ms;
   &:hover {

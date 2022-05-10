@@ -2,8 +2,17 @@ export function storeKatakana(text) {
     localStorage.setItem("katakana", text)
 }
 
+export function clearKatakana() {
+    localStorage.removeItem("katakana")
+}
+
 function getKatakana() {
     let kanaText = localStorage.getItem("katakana")
+
+    if (kanaText === null) {
+        return []
+    }
+
     return kanaText.split("\n")
 }
 

@@ -17,6 +17,10 @@ function Reset() {
 }
 
 export function reset() {
+    // todo
+    // clearKatakana()
+    // loadKatakana()
+
     if (isKatakanaLoaded()) {
         clearWrongAnswers();
         setRandomCharacterSeed();
