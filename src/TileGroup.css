@@ -1,0 +1,48 @@
+.TileGroup {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Question {
+    text-align: center;
+    background-color: #282c34;
+    min-height: 10vh;
+    vertical-align: top;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.TileGroup-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .TileGroup-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: top;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.TileGroup-link {
+    color: #61dafb;
+}
+
+@keyframes TileGroup-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
