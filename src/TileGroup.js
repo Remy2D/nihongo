@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 import React from "react";
 import * as KanaModel from './KanaModel.js'
-import {reset} from "./Reset";
+import {resetQuestion} from "./ResetQuestion";
 import {isKatakanaLoaded} from "./KanaLoad";
 import {kanaMatches} from "./KanaModel.js";
 import {addWrongAnswer, isWrongAnswer} from "./WrongAnswers.js";
+import {incrementCounter, resetCounter} from "./Counter.js";
 
 const theme = {
     blue: {
@@ -82,8 +83,10 @@ function clickMe(button) {
 
     if (kanaMatches(kana, romaji)) {
         console.log("Match!: " + kana + "=" + romaji)
-        reset();
+        resetQuestion();
+        incrementCounter();
     } else {
+        resetCounter();
         addWrongAnswer(kana)
         console.log("Wrong: " + kana + " != " + romaji)
     }

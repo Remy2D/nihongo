@@ -5,10 +5,15 @@
 
 .Question {
     text-align: center;
-    background-color: #282c34;
-    min-height: 10vh;
-    font-size: calc(10px + 3vmin);
+    font-size: calc(10px + 6vmin);
     color: white;
+}
+
+.Counter {
+    text-align: center;
+    min-width: 20vh;
+    font-size: calc(10px + 3vmin);
+    color: #cccfdf;
 }
 
 .TileGroup-logo {

@@ -7,6 +7,7 @@
     "path": false,
     "os": false
   },
+  "homepage": "https://remy2d.com/nihongo",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",

@@ -16,7 +16,7 @@ function Question() {
 function prepareDiv() {
     let character = localStorage.getItem(QUESTION_FIELD)
     return (
-        <p className="Question">{character}</p>
+        <div className="Question">{character}</div>
     )
 }
 

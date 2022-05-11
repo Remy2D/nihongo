@@ -4,19 +4,21 @@ import {isKatakanaLoaded} from "./KanaLoad";
 import {setRandomCharacterSeed} from "./Question";
 import './Reset.css';
 import React from "react";
+import {resetCounter} from "./Counter";
 
 function Reset() {
     return (
         <Button className="Reset" variant="warning"
                 onClick={() => {
-                    reset()
+                    resetQuestion()
+                    resetCounter()
                 }}>
-            <img src="http://localhost:8069/Refresh_icon.svg" alt="Reset"/>
+            <img src="https://remy2d.com/nihongo-static/Refresh_icon.svg" alt="Reset"/>
         </Button>
     )
 }
 
-export function reset() {
+export function resetQuestion() {
     // todo
     // clearKatakana()
     // loadKatakana()
