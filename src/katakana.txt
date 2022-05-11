@@ -42,8 +42,6 @@
 レ,re
 ロ,ro
 ワ,wa
-ヰ,wi
-ヱ,we
 ヲ,wo
 ン,n
 ガ,ga
