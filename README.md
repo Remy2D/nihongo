@@ -1,6 +1,6 @@
 ## Available Scripts
 
-### `npm start`
+### `npm start run`
 
 ### `npm test`
 

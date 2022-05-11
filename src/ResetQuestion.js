@@ -1,4 +1,3 @@
-import {clearWrongAnswers} from "./WrongAnswers";
 import Button from 'react-bootstrap/Button'
 import {isKatakanaLoaded} from "./KanaLoad";
 import {setRandomCharacterSeed} from "./Question";
@@ -24,7 +23,6 @@ export function resetQuestion() {
     // loadKatakana()
 
     if (isKatakanaLoaded()) {
-        clearWrongAnswers();
         setRandomCharacterSeed();
     }
     window.location.reload(false);

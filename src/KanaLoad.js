@@ -29,5 +29,4 @@ export function loadKatakana() {
         });
 
     //todo redraw?
-    // window.location.reload(false);
 }
