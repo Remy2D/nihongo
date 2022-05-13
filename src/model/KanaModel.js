@@ -6,16 +6,6 @@ export function clearKatakana() {
     localStorage.removeItem("katakana")
 }
 
-function getKatakana() {
-    let kanaText = localStorage.getItem("katakana")
-
-    if (kanaText === null) {
-        return []
-    }
-
-    return kanaText.split("\n")
-}
-
 export function getKatakanaKanaSet() {
     let pairs = getKatakana()
 
@@ -34,4 +24,18 @@ export function kanaMatches(userKana, romaji) {
     let questionKana = getKatakanaKanaSet()[index]
 
     return userKana === questionKana
+}
+
+export function getKatakanaPairs() {
+    return getKatakana().map(e => e.split(","))
+}
+
+function getKatakana() {
+    let kanaText = localStorage.getItem("katakana")
+
+    if (kanaText === null) {
+        return []
+    }
+
+    return kanaText.split("\n")
 }

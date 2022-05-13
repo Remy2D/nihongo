@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button'
-import {isKatakanaLoaded} from "./KanaLoad";
+import {isKatakanaLoaded} from "./model/KanaLoader";
 import {setRandomCharacterSeed} from "./Question";
 import './Reset.css';
 import React from "react";

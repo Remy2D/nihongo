@@ -1,6 +1,6 @@
 import './tile_group/TileGroup.css';
-import {isKatakanaLoaded} from "./KanaLoad";
-import {getKatakanaRomajiSet} from "./KanaModel";
+import {isKatakanaLoaded} from "./model/KanaLoader";
+import {getKatakanaRomajiSet} from "./model/KanaModel";
 
 function Question() {
     if (isKatakanaLoaded()) {

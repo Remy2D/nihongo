@@ -21,7 +21,6 @@ export function loadKatakana() {
 
     console.log("Loading Katakana");
 
-
     fetch(katakanaSrc)
         .then(r => r.text())
         .then(text => {

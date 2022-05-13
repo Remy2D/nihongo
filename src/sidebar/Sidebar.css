@@ -68,7 +68,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Individual item */
 .bm-item {
     display: inline-block;
-
     color: #cccfdf;
     margin-bottom: 10px;
     font-size: 15px;
@@ -118,7 +117,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
 }
 
 .KanaCheckboxInput {

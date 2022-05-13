@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import React from "react";
 import {resetQuestion} from "../ResetQuestion";
-import {kanaMatches} from "../KanaModel.js";
+import {kanaMatches} from "../model/KanaModel.js";
 import {incrementCounter, resetCounter} from "../Counter.js";
 
 const theme = {

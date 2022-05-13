@@ -2,7 +2,8 @@ import React from 'react';
 import {slide as Menu} from 'react-burger-menu';
 import './Sidebar.css';
 import KanaCheckbox from "./KanaCheckbox";
-import * as KanaModel from "../KanaModel";
+import * as KanaModel from "../model/KanaModel";
+import {getKatakanaKanaSet, getKatakanaPairs} from "../model/KanaModel";
 
 
 class Sidebar extends React.Component {
@@ -14,6 +15,7 @@ class Sidebar extends React.Component {
 
         this.state = {
             charsList: this.getBaseKanaSet(true),
+            editCallback: props.editCallback
         };
     }
 
@@ -29,6 +31,13 @@ class Sidebar extends React.Component {
         prevChars[index][1] = !prevChars[index][1]
 
         this.setState({charsList: prevChars})
+
+        let filteredRomaji = prevChars.filter(e => e[1]).map(e => e[0])
+        let filteredKana = getKatakanaPairs()
+            .filter(e => filteredRomaji.includes(e[1]))
+            .map(e => e[0])
+
+        this.state.editCallback(filteredKana)
     }
 
     render() {
@@ -44,6 +53,7 @@ class Sidebar extends React.Component {
                             <button className="AllButton"
                                     onClick={() => {
                                         this.setState({charsList: this.getBaseKanaSet(true)})
+                                        this.state.editCallback(getKatakanaKanaSet())
                                     }}>
                                 All
                             </button>
@@ -52,6 +62,7 @@ class Sidebar extends React.Component {
                             <button className="NoneButton"
                                     onClick={() => {
                                         this.setState({charsList: this.getBaseKanaSet(false)})
+                                        this.state.editCallback([])
                                     }}>
                                 None
                             </button>
