@@ -1,16 +1,12 @@
 import './tile_group/TileGroup.css';
-import {isKatakanaLoaded} from "./model/KanaLoader";
-import {getKatakanaRomajiSet} from "./model/KanaModel";
+import {getKatakanaPairs} from "./model/KanaModel";
 
-function Question() {
-    if (isKatakanaLoaded()) {
-
-        if (hasEmptySeed()) {
-            setRandomCharacterSeed();
-        }
-
-        return prepareDiv();
+function Question(props) {
+    if (hasEmptySeed() || seedNotInList(props.charsList)) {
+        setRandomCharacterSeed(props.charsList);
     }
+
+    return prepareDiv();
 }
 
 function prepareDiv() {
@@ -22,14 +18,22 @@ function prepareDiv() {
 
 const QUESTION_FIELD = "currentQuestion"
 
-export function setRandomCharacterSeed() {
-    let romaji = getKatakanaRomajiSet();
+export function setRandomCharacterSeed(charsList) {
+    let allowedRomaji = getKatakanaPairs()
+        .filter(e => charsList.includes(e[0]))
+        .map(e => e[1])
 
-    localStorage.setItem(QUESTION_FIELD, romaji[Math.floor((Math.random() * romaji.length))])
+    localStorage.setItem(
+        QUESTION_FIELD, allowedRomaji[Math.floor((Math.random() * allowedRomaji.length))]
+    )
 }
 
 function hasEmptySeed() {
     return localStorage.getItem(QUESTION_FIELD) === null
+}
+
+function seedNotInList(charsList) {
+    return !charsList.includes(localStorage.getItem(QUESTION_FIELD))
 }
 
 export default Question;

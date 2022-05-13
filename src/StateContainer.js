@@ -12,6 +12,7 @@ class StateContainer extends React.Component {
         super(props);
 
         this.state = {
+            redraw: true,
             charsList: props.charsList
         }
     }
@@ -19,6 +20,11 @@ class StateContainer extends React.Component {
     editCallback(filteredKana) {
         this.setState({
             charsList: filteredKana
+        })
+    }
+
+    successCallback() {
+        this.setState({
         })
     }
 
@@ -42,8 +48,12 @@ class StateContainer extends React.Component {
                                         <td align="center" style={{verticalAlign: 'bottom'}}>
                                             <Reset/>
                                         </td>
-                                        <td style={{verticalAlign: 'bottom'}}><Question/></td>
-                                        <td style={{verticalAlign: 'bottom'}}><Counter/></td>
+                                        <td style={{verticalAlign: 'bottom'}}>
+                                            <Question charsList={this.state.charsList}/>
+                                        </td>
+                                        <td style={{verticalAlign: 'bottom'}}>
+                                            <Counter/>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -53,7 +63,9 @@ class StateContainer extends React.Component {
                         </tbody>
                     </table>
 
-                    <TileGroup charsList={this.state.charsList}/>
+                    <TileGroup charsList={this.state.charsList}
+                               solvedCallback={() => this.successCallback()}
+                    />
 
                 </header>
             </div>
