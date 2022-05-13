@@ -1,4 +1,4 @@
-import './TileGroup.css';
+import './tile_group/TileGroup.css';
 import {isKatakanaLoaded} from "./KanaLoad";
 import {getKatakanaRomajiSet} from "./KanaModel";
 

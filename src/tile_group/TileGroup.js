@@ -1,8 +1,8 @@
 import './TileGroup.css';
 
 import React from "react";
-import * as KanaModel from './KanaModel.js'
-import {isKatakanaLoaded} from "./KanaLoad";
+import * as KanaModel from '../KanaModel.js'
+import {isKatakanaLoaded} from "../KanaLoad";
 import Tile from "./Tile";
 
 function TileGroup() {

@@ -2,9 +2,9 @@ import './TileGroup.css';
 import styled from "styled-components";
 
 import React from "react";
-import {resetQuestion} from "./ResetQuestion";
-import {kanaMatches} from "./KanaModel.js";
-import {incrementCounter, resetCounter} from "./Counter.js";
+import {resetQuestion} from "../ResetQuestion";
+import {kanaMatches} from "../KanaModel.js";
+import {incrementCounter, resetCounter} from "../Counter.js";
 
 const theme = {
     blue: {
