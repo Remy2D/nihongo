@@ -12,7 +12,7 @@ function Question(props) {
 function prepareDiv() {
     let character = localStorage.getItem(QUESTION_FIELD)
     return (
-        <div className="Question">{character}</div>
+        <div className="Question">{character ? character : " "}</div>
     )
 }
 
@@ -23,9 +23,9 @@ export function setRandomCharacterSeed(charsList) {
         .filter(e => charsList.includes(e[0]))
         .map(e => e[1])
 
-    localStorage.setItem(
-        QUESTION_FIELD, allowedRomaji[Math.floor((Math.random() * allowedRomaji.length))]
-    )
+    let draw = allowedRomaji[Math.floor((Math.random() * allowedRomaji.length))]
+
+    localStorage.setItem(QUESTION_FIELD, draw ? draw : "-")
 }
 
 function hasEmptySeed() {
