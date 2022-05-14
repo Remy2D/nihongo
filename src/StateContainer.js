@@ -1,9 +1,10 @@
 import React from "react";
 import Sidebar from "./sidebar/Sidebar";
-import Reset from "./ResetQuestion";
+import Reset from "./Reset";
 import Question from "./Question";
 import Counter, {resetCounter} from "./Counter";
 import TileGroup from "./tile_group/TileGroup";
+import KanaLoadModal from "./loader/Modal";
 
 
 class StateContainer extends React.Component {
@@ -89,6 +90,8 @@ class StateContainer extends React.Component {
                     />
 
                 </header>
+
+                <KanaLoadModal/>
             </div>
         )
     }

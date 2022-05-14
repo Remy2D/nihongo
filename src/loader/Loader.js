@@ -1,5 +1,5 @@
-import katakanaSrc from "./katakana.txt";
-import * as KanaModel from './KatakanaModel.js'
+import katakanaSrc from "../model/katakana.txt";
+import * as KanaModel from '../model/KatakanaModel.js'
 
 
 export function clearKatakana() {
@@ -13,7 +13,7 @@ export function isKatakanaLoaded() {
         KanaModel.getKatakanaKanaSet().length > 0
 }
 
-export function loadKatakana() {
+export function loadKatakana(dialogCloseCallback) {
     if (isKatakanaLoaded()) {
         console.log("Katakana already loaded");
         return;
@@ -25,7 +25,6 @@ export function loadKatakana() {
         .then(r => r.text())
         .then(text => {
             KanaModel.storeKatakana(text)
-        });
-
-    //todo redraw?
+        })
+        .then(() => dialogCloseCallback());
 }
