@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "./sidebar/Sidebar";
 import Reset from "./ResetQuestion";
 import Question from "./Question";
-import Counter from "./Counter";
+import Counter, {resetCounter} from "./Counter";
 import TileGroup from "./tile_group/TileGroup";
 
 
@@ -23,6 +23,7 @@ class StateContainer extends React.Component {
         })
     }
 
+
     successCallback() {
         this.setState({
             wrongAnswers: []
@@ -35,6 +36,13 @@ class StateContainer extends React.Component {
             return {
                 wrongAnswers: wrongAnswers
             }
+        })
+    }
+
+    resetCallback() {
+        resetCounter()
+        this.setState({
+            wrongAnswers: []
         })
     }
 
@@ -56,7 +64,7 @@ class StateContainer extends React.Component {
                                     <tbody>
                                     <tr>
                                         <td align="center" style={{verticalAlign: 'bottom'}}>
-                                            <Reset/>
+                                            <Reset resetCallback={() => this.resetCallback()}/>
                                         </td>
                                         <td style={{verticalAlign: 'bottom'}}>
                                             <Question charsList={this.state.charsList}
