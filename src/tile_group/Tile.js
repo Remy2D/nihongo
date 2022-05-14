@@ -2,7 +2,7 @@ import './TileGroup.css';
 import styled from "styled-components";
 
 import React from "react";
-import {kanaMatches} from "../model/KanaModel.js";
+import {kanaMatches} from "../model/KatakanaModel.js";
 import {incrementCounter, resetCounter} from "../Counter.js";
 
 const theme = {
@@ -40,15 +40,13 @@ const Button = styled.button`
 class Tile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isError: props.isError,
-            kana: props.kana,
-            solvedCallback: props.solvedCallback
-        };
-    }
 
-    markAsError = () => {
-        this.setState({isError: true})
+        this.state = {
+            isError: props.isWrongAnswer,
+            kana: props.kana,
+            solvedCallback: props.solvedCallback,
+            errorCallback: props.errorCallback
+        };
     }
 
     render() {
@@ -67,12 +65,12 @@ function clickMe(button) {
 
     if (kanaMatches(kana, romaji)) {
         console.log("Match!: " + kana + "=" + romaji)
-        button.state.solvedCallback()
         incrementCounter();
+        button.state.solvedCallback();
     } else {
         console.log("Wrong: " + kana + " != " + romaji)
-        button.markAsError();
         resetCounter();
+        button.state.errorCallback(kana);
     }
 }
 

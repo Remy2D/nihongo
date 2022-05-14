@@ -1,5 +1,5 @@
 import katakanaSrc from "./katakana.txt";
-import * as KanaModel from './KanaModel.js'
+import * as KanaModel from './KatakanaModel.js'
 
 
 export function clearKatakana() {

@@ -1,8 +1,8 @@
 import './tile_group/TileGroup.css';
-import {getKatakanaPairs} from "./model/KanaModel";
+import {getKatakanaPairs, romajiToKatakana} from "./model/KatakanaModel";
 
 function Question(props) {
-    if (hasEmptySeed() || seedNotInList(props.charsList)) {
+    if (hasEmptySeed() || noWrongAnswers(props) || seedNotInList(props.charsList)) {
         setRandomCharacterSeed(props.charsList);
     }
 
@@ -32,8 +32,15 @@ function hasEmptySeed() {
     return localStorage.getItem(QUESTION_FIELD) === null
 }
 
+function noWrongAnswers(props) {
+    return props.wrongAnswers.length === 0
+}
+
 function seedNotInList(charsList) {
-    return !charsList.includes(localStorage.getItem(QUESTION_FIELD))
+    let romaji = localStorage.getItem(QUESTION_FIELD)
+    let kana = romajiToKatakana(romaji)
+
+    return !charsList.includes(kana)
 }
 
 export default Question;

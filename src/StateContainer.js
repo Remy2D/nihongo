@@ -12,8 +12,8 @@ class StateContainer extends React.Component {
         super(props);
 
         this.state = {
-            redraw: true,
-            charsList: props.charsList
+            charsList: props.charsList,
+            wrongAnswers: []
         }
     }
 
@@ -25,6 +25,16 @@ class StateContainer extends React.Component {
 
     successCallback() {
         this.setState({
+            wrongAnswers: []
+        })
+    }
+
+    errorCallback(wrongAnswer) {
+        this.setState((prevState) => {
+            let wrongAnswers = [...prevState.wrongAnswers, wrongAnswer]
+            return {
+                wrongAnswers: wrongAnswers
+            }
         })
     }
 
@@ -49,7 +59,8 @@ class StateContainer extends React.Component {
                                             <Reset/>
                                         </td>
                                         <td style={{verticalAlign: 'bottom'}}>
-                                            <Question charsList={this.state.charsList}/>
+                                            <Question charsList={this.state.charsList}
+                                                      wrongAnswers={this.state.wrongAnswers}/>
                                         </td>
                                         <td style={{verticalAlign: 'bottom'}}>
                                             <Counter/>
@@ -64,7 +75,9 @@ class StateContainer extends React.Component {
                     </table>
 
                     <TileGroup charsList={this.state.charsList}
+                               wrongAnswers={this.state.wrongAnswers}
                                solvedCallback={() => this.successCallback()}
+                               errorCallback={(e) => this.errorCallback(e)}
                     />
 
                 </header>

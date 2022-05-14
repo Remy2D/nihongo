@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button'
-import {isKatakanaLoaded} from "./model/KanaLoader";
+import {isKatakanaLoaded} from "./model/Loader";
 import {setRandomCharacterSeed} from "./Question";
 import './Reset.css';
 import React from "react";
@@ -9,7 +9,7 @@ function Reset() {
     return (
         <Button className="Reset" variant="warning"
                 onClick={() => {
-                    resetQuestion()
+                    // resetQuestion()
                     resetCounter()
                 }}>
             <img src="https://remy2d.com/nihongo-static/Refresh_icon.svg" alt="Reset"/>

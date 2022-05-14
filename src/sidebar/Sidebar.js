@@ -2,8 +2,8 @@ import React from 'react';
 import {slide as Menu} from 'react-burger-menu';
 import './Sidebar.css';
 import KanaCheckbox from "./KanaCheckbox";
-import * as KanaModel from "../model/KanaModel";
-import {getKatakanaKanaSet, getKatakanaPairs} from "../model/KanaModel";
+import * as KanaModel from "../model/KatakanaModel";
+import {getKatakanaKanaSet, getKatakanaPairs} from "../model/KatakanaModel";
 
 
 class Sidebar extends React.Component {

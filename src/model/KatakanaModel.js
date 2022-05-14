@@ -1,9 +1,11 @@
+const KATAKANA_FIELD = "katakana"
+
 export function storeKatakana(text) {
-    localStorage.setItem("katakana", text)
+    localStorage.setItem(KATAKANA_FIELD, text)
 }
 
 export function clearKatakana() {
-    localStorage.removeItem("katakana")
+    localStorage.removeItem(KATAKANA_FIELD)
 }
 
 export function getKatakanaKanaSet() {
@@ -30,8 +32,30 @@ export function getKatakanaPairs() {
     return getKatakana().map(e => e.split(","))
 }
 
+export function katakanaToRomaji(katakana) {
+    let result = getKatakanaPairs()
+        .filter(e => e[0] === katakana)
+        .map(e => e[1])
+
+    if (result.length === 1) {
+        return result[0]
+    }
+    return null
+}
+
+export function romajiToKatakana(romaji) {
+    let result = getKatakanaPairs()
+        .filter(e => e[1] === romaji)
+        .map(e => e[0])
+
+    if (result.length === 1) {
+        return result[0]
+    }
+    return null
+}
+
 function getKatakana() {
-    let kanaText = localStorage.getItem("katakana")
+    let kanaText = localStorage.getItem(KATAKANA_FIELD)
 
     if (kanaText === null) {
         return []

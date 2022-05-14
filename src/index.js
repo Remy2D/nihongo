@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './tile_group/TileGroup.css';
 import reportWebVitals from './reportWebVitals';
-import {loadKatakana} from "./model/KanaLoader";
+import {loadKatakana} from "./model/Loader";
 import StateContainer from "./StateContainer";
-import {getKatakanaKanaSet} from "./model/KanaModel";
+import {getKatakanaKanaSet} from "./model/KatakanaModel";
 
 function onLoad() {
     loadKatakana();

@@ -8,18 +8,22 @@ function TileGroup(props) {
         <React.StrictMode>
             <div className="TileGroup">
                 {
-                    props.charsList.map(line => mapToButton(line, props.solvedCallback))
+                    props.charsList.map(line => mapToButton(
+                        line, props.wrongAnswers, props.solvedCallback, props.errorCallback
+                    ))
                 }
             </div>
         </React.StrictMode>
     );
 }
 
-function mapToButton(line, solvedCallback) {
+function mapToButton(line, wrongAnswers, solvedCallback, errorCallback) {
+    let isWrongAnswer = wrongAnswers.findIndex(e => e === line) >= 0
     return (
-        <Tile isError={false} kana={line}
+        <Tile kana={line} isWrongAnswer={isWrongAnswer}
               key={Math.random()}
-              solvedCallback={solvedCallback}/>
+              solvedCallback={solvedCallback}
+              errorCallback={errorCallback}/>
     );
 }
 
