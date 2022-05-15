@@ -1,0 +1,14 @@
+.TranslateDirectionButton {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    vertical-align: bottom;
+    padding: 0 10px !important;
+}
+
+.TranslateDirectionButtonIcon {
+    color: #ffc107;
+    width: 50px;
+    height: 50px;
+    vertical-align: bottom;
+}

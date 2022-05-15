@@ -3,7 +3,11 @@ import {slide as Menu} from 'react-burger-menu';
 import './Sidebar.css';
 import KanaCheckbox from "./KanaCheckbox";
 import * as KanaModel from "../model/KatakanaModel";
-import {getKatakanaKanaSet, getKatakanaPairs} from "../model/KatakanaModel";
+import {
+    getKatakanaKanaSet,
+    translateAllowedCharacters
+} from "../model/KatakanaModel";
+import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from "../common/Constants";
 
 
 class Sidebar extends React.Component {
@@ -15,8 +19,17 @@ class Sidebar extends React.Component {
 
         this.state = {
             charsList: this.getBaseKanaSet(true),
-            editCallback: props.editCallback
+            editCallback: props.editCallback,
+            direction: props.direction
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.direction !== this.state.direction) {
+            this.setState({
+                direction: nextProps.direction
+            });
+        }
     }
 
     getBaseKanaSet(isEnabled) {
@@ -33,9 +46,14 @@ class Sidebar extends React.Component {
         this.setState({charsList: prevChars})
 
         let filteredRomaji = prevChars.filter(e => e[1]).map(e => e[0])
-        let filteredKana = getKatakanaPairs()
-            .filter(e => filteredRomaji.includes(e[1]))
-            .map(e => e[0])
+
+        let filteredKana
+
+        if (this.state.direction === KANA_TO_ROMAJI) {
+            filteredKana = translateAllowedCharacters(filteredRomaji, ROMAJI_TO_KANA)
+        } else {
+            filteredKana = filteredRomaji
+        }
 
         this.state.editCallback(filteredKana)
     }

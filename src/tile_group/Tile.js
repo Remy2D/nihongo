@@ -42,8 +42,9 @@ class Tile extends React.Component {
         super(props);
 
         this.state = {
+            isKatakana: props.isKatakana,
             isError: props.isWrongAnswer,
-            kana: props.kana,
+            character: props.kana,
             solvedCallback: props.solvedCallback,
             errorCallback: props.errorCallback
         };
@@ -51,26 +52,26 @@ class Tile extends React.Component {
 
     render() {
         let themeName = this.state.isError ? "pink" : "blue"
-        let kana = this.state.kana
+        let character = this.state.character
         return (
-            <Button className="Tile" theme={themeName} onClick={e => clickMe(this)} value={kana}
-                    key={kana}>{kana}</Button>
+            <Button className="Tile" theme={themeName} onClick={e => clickMe(this)}
+                    value={character} key={character}>{character}</Button>
         );
     }
 }
 
 function clickMe(button) {
-    let kana = button.state.kana
-    let romaji = document.getElementsByClassName('Question')[0].textContent
+    let character = button.state.character
+    let question = document.getElementsByClassName('Question')[0].textContent
 
-    if (kanaMatches(kana, romaji)) {
-        console.log("Match!: " + kana + "=" + romaji)
+    if (kanaMatches(character, question, button.state.isKatakana)) {
+        console.log("Match!: " + character + "=" + question)
         incrementCounter();
         button.state.solvedCallback();
     } else {
-        console.log("Wrong: " + kana + " != " + romaji)
+        console.log("Wrong: " + character + " != " + question)
         resetCounter();
-        button.state.errorCallback(kana);
+        button.state.errorCallback(character);
     }
 }
 

@@ -55,8 +55,8 @@
 ゼ,ze
 ゾ,zo
 ダ,da
-ヂ,ji
-ヅ,zu
+ヂ,jji
+ヅ,zzu
 デ,de
 ド,do
 バ,ba

@@ -6,9 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import {loadKatakana} from "./loader/Loader";
 import StateContainer from "./StateContainer";
 import {getKatakanaKanaSet} from "./model/KatakanaModel";
+import {resetCounter} from "./Counter";
 
 function onLoad() {
     loadKatakana(reload);
+    resetCounter();
 }
 
 window.addEventListener('onload', onLoad())

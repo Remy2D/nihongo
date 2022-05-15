@@ -1,9 +1,13 @@
 import './tile_group/TileGroup.css';
-import {getKatakanaPairs, romajiToKatakana} from "./model/KatakanaModel";
+import {
+    katakanaToRomaji,
+    romajiToKatakana,
+    translateAllowedCharacters
+} from "./model/KatakanaModel";
 
 function Question(props) {
-    if (hasEmptySeed() || noWrongAnswers(props) || seedNotInList(props.charsList)) {
-        setRandomCharacterSeed(props.charsList);
+    if (hasEmptySeed() || noWrongAnswers(props) || seedNotInList(props.charsList, props.isKanaToRomaji)) {
+        setRandomCharacterSeed(props.charsList, props.direction);
     }
 
     return prepareDiv();
@@ -18,12 +22,10 @@ function prepareDiv() {
 
 const QUESTION_FIELD = "currentQuestion"
 
-export function setRandomCharacterSeed(charsList) {
-    let allowedRomaji = getKatakanaPairs()
-        .filter(e => charsList.includes(e[0]))
-        .map(e => e[1])
+export function setRandomCharacterSeed(charsList, direction) {
+    let allowedCharacters = translateAllowedCharacters(charsList, direction)
 
-    let draw = allowedRomaji[Math.floor((Math.random() * allowedRomaji.length))]
+    let draw = allowedCharacters[Math.floor((Math.random() * allowedCharacters.length))]
 
     localStorage.setItem(QUESTION_FIELD, draw ? draw : "-")
 }
@@ -36,11 +38,15 @@ function noWrongAnswers(props) {
     return props.wrongAnswers.length === 0
 }
 
-function seedNotInList(charsList) {
-    let romaji = localStorage.getItem(QUESTION_FIELD)
-    let kana = romajiToKatakana(romaji)
-
-    return !charsList.includes(kana)
+function seedNotInList(charsList, isKanaToRomaji) {
+    let question = localStorage.getItem(QUESTION_FIELD)
+    if (isKanaToRomaji) {
+        let translatedCharacter = romajiToKatakana(question)
+        return !charsList.includes(translatedCharacter)
+    } else {
+        let translatedCharacter = katakanaToRomaji(question)
+        return !charsList.includes(translatedCharacter)
+    }
 }
 
 export default Question;

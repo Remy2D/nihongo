@@ -9,7 +9,11 @@ function TileGroup(props) {
             <div className="TileGroup">
                 {
                     props.charsList.map(line => mapToButton(
-                        line, props.wrongAnswers, props.solvedCallback, props.errorCallback
+                        line,
+                        props.wrongAnswers,
+                        props.solvedCallback,
+                        props.errorCallback,
+                        props.isKatakana
                     ))
                 }
             </div>
@@ -17,11 +21,11 @@ function TileGroup(props) {
     );
 }
 
-function mapToButton(line, wrongAnswers, solvedCallback, errorCallback) {
+function mapToButton(line, wrongAnswers, solvedCallback, errorCallback, isKatakana) {
     let isWrongAnswer = wrongAnswers.findIndex(e => e === line) >= 0
     return (
         <Tile kana={line} isWrongAnswer={isWrongAnswer}
-              key={Math.random()}
+              key={Math.random()} isKatakana={isKatakana}
               solvedCallback={solvedCallback}
               errorCallback={errorCallback}/>
     );

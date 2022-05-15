@@ -10,10 +10,10 @@
 }
 
 .Counter {
-    text-align: center;
+    text-align: left;
     min-width: 20vh;
-    font-size: calc(10px + 3vmin);
-    color: #cccfdf;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .TileGroup-logo {

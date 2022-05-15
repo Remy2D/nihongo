@@ -6,7 +6,7 @@ function Counter() {
 
 function prepareDiv() {
     let counter = localStorage.getItem(COUNTER_FIELD)
-    let desc = "seria: ".concat(counter ? counter : "0")
+    let desc = "Seria: ".concat(counter ? counter : "0")
     return (
         <div className="Counter">{desc}</div>
     )

@@ -5,6 +5,9 @@ import Question from "./Question";
 import Counter, {resetCounter} from "./Counter";
 import TileGroup from "./tile_group/TileGroup";
 import KanaLoadModal from "./loader/Modal";
+import TranslateDirectionButton from "./translate_direction/TranslateDirectionButton";
+import {translateAllowedCharacters} from "./model/KatakanaModel";
+import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from './common/Constants'
 
 
 class StateContainer extends React.Component {
@@ -14,7 +17,8 @@ class StateContainer extends React.Component {
 
         this.state = {
             charsList: props.charsList,
-            wrongAnswers: []
+            wrongAnswers: [],
+            direction: KANA_TO_ROMAJI
         }
     }
 
@@ -23,7 +27,6 @@ class StateContainer extends React.Component {
             charsList: filteredKana
         })
     }
-
 
     successCallback() {
         this.setState({
@@ -47,19 +50,44 @@ class StateContainer extends React.Component {
         })
     }
 
+    changeDirectionCallback() {
+        this.setState((prevState) => {
+            let lastDirection = prevState.direction
+
+            if (lastDirection === KANA_TO_ROMAJI) {
+                return {
+                    wrongAnswers: [],
+                    charsList: translateAllowedCharacters(prevState.charsList, KANA_TO_ROMAJI),
+                    direction: ROMAJI_TO_KANA
+                }
+            } else {
+                return {
+                    wrongAnswers: [],
+                    charsList: translateAllowedCharacters(prevState.charsList, ROMAJI_TO_KANA),
+                    direction: KANA_TO_ROMAJI
+                }
+            }
+        })
+    }
+
     render() {
         return (
             <div className="StateContainer" id="outer-container">
                 <header className="App-header" id="page-wrap">
                     <Sidebar editCallback={(filteredKana) => this.editCallback(filteredKana)}
                              pageWrapId={'page-wrap'}
-                             outerContainerId={'outer-container'}/>
+                             outerContainerId={'outer-container'}
+                             direction={this.state.direction}/>
                     <br/>
                     <br/>
                     <table className="Header-table">
                         <tbody>
                         <tr>
-                            <td/>
+                            <td align="right" style={{verticalAlign: 'bottom'}}>
+                                <TranslateDirectionButton
+                                    isKanaToRomaji={this.state.direction === KANA_TO_ROMAJI}
+                                    changeDirectionCallback={() => this.changeDirectionCallback()}/>
+                            </td>
                             <td>
                                 <table className="Header-table">
                                     <tbody>
@@ -68,17 +96,22 @@ class StateContainer extends React.Component {
                                             <Reset resetCallback={() => this.resetCallback()}/>
                                         </td>
                                         <td style={{verticalAlign: 'bottom'}}>
-                                            <Question charsList={this.state.charsList}
-                                                      wrongAnswers={this.state.wrongAnswers}/>
+                                            <Question direction={this.state.direction}
+                                                      charsList={this.state.charsList}
+                                                      wrongAnswers={this.state.wrongAnswers}
+                                                      isKanaToRomaji={this.state.direction === KANA_TO_ROMAJI}
+                                            />
                                         </td>
                                         <td style={{verticalAlign: 'bottom'}}>
-                                            <Counter/>
+
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </td>
-                            <td/>
+                            <td style={{verticalAlign: 'bottom'}}>
+                                <Counter/>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -87,8 +120,8 @@ class StateContainer extends React.Component {
                                wrongAnswers={this.state.wrongAnswers}
                                solvedCallback={() => this.successCallback()}
                                errorCallback={(e) => this.errorCallback(e)}
+                               isKatakana={this.state.direction === KANA_TO_ROMAJI}
                     />
-
                 </header>
 
                 <KanaLoadModal/>

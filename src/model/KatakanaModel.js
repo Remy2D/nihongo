@@ -1,3 +1,5 @@
+import {KANA_TO_ROMAJI} from "../common/Constants";
+
 const KATAKANA_FIELD = "katakana"
 
 export function storeKatakana(text) {
@@ -21,11 +23,19 @@ export function getKatakanaRomajiSet() {
 
 }
 
-export function kanaMatches(userKana, romaji) {
-    let index = getKatakanaRomajiSet().indexOf(romaji)
-    let questionKana = getKatakanaKanaSet()[index]
+export function kanaMatches(userKana, question, isKatakana) {
+    if (isKatakana) {
+        return doesKanaMatch(userKana, question, getKatakanaRomajiSet(), getKatakanaKanaSet())
+    } else {
+        return doesKanaMatch(userKana, question, getKatakanaKanaSet(), getKatakanaRomajiSet())
+    }
+}
 
-    return userKana === questionKana
+export function doesKanaMatch(userKana, question, questionSet, userSet) {
+    let index = questionSet.indexOf(question)
+    let questionTranslate = userSet[index]
+
+    return userKana === questionTranslate
 }
 
 export function getKatakanaPairs() {
@@ -52,6 +62,18 @@ export function romajiToKatakana(romaji) {
         return result[0]
     }
     return null
+}
+
+export function translateAllowedCharacters(charsList, direction) {
+    if (direction === KANA_TO_ROMAJI) {
+        return getKatakanaPairs()
+            .filter(e => charsList.includes(e[0]))
+            .map(e => e[1])
+    } else {
+        return getKatakanaPairs()
+            .filter(e => charsList.includes(e[1]))
+            .map(e => e[0])
+    }
 }
 
 function getKatakana() {
