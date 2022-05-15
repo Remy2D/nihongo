@@ -5,6 +5,9 @@ import {
     translateAllowedCharacters
 } from "./model/KatakanaModel";
 
+
+const QUESTION_FIELD = "currentQuestion"
+
 function Question(props) {
     if (hasEmptySeed() || noWrongAnswers(props) || seedNotInList(props.charsList, props.isKanaToRomaji)) {
         setRandomCharacterSeed(props.charsList, props.direction);
@@ -19,8 +22,6 @@ function prepareDiv() {
         <div className="Question">{character ? character : " "}</div>
     )
 }
-
-const QUESTION_FIELD = "currentQuestion"
 
 export function setRandomCharacterSeed(charsList, direction) {
     let allowedCharacters = translateAllowedCharacters(charsList, direction)

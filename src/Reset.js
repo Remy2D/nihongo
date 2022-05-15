@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button'
-import './Reset.css';
 import React from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faRepeat} from '@fortawesome/free-solid-svg-icons'
+import './Reset.css';
 
 function Reset(props) {
     return (
@@ -8,7 +10,7 @@ function Reset(props) {
                 onClick={() => {
                     props.resetCallback()
                 }}>
-            <img src="https://remy2d.com/nihongo-static/Refresh_icon.svg" alt="Reset"/>
+            <FontAwesomeIcon className="ResetButtonIcon" icon={faRepeat}/>
         </Button>
     )
 }
