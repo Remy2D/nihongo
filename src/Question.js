@@ -4,9 +4,8 @@ import {
     romajiToKatakana,
     translateAllowedCharacters
 } from "./model/KatakanaModel";
+import {PREV_QUESTION_FIELD, QUESTION_FIELD} from "./common/Constants";
 
-
-const QUESTION_FIELD = "currentQuestion"
 
 function Question(props) {
     if (hasEmptySeed() || noWrongAnswers(props) || seedNotInList(props.charsList, props.isKanaToRomaji)) {
@@ -24,7 +23,13 @@ function prepareDiv() {
 }
 
 export function setRandomCharacterSeed(charsList, direction) {
+    let prevQuestion = localStorage.getItem(PREV_QUESTION_FIELD)
+
     let allowedCharacters = translateAllowedCharacters(charsList, direction)
+
+    if (allowedCharacters.length > 1) {
+        allowedCharacters = allowedCharacters.filter(e => e !== prevQuestion)
+    }
 
     let draw = allowedCharacters[Math.floor((Math.random() * allowedCharacters.length))]
 

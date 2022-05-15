@@ -4,6 +4,7 @@ import styled from "styled-components";
 import React from "react";
 import {kanaMatches} from "../model/KatakanaModel.js";
 import {incrementCounter, resetCounter} from "../Counter.js";
+import {PREV_QUESTION_FIELD, QUESTION_FIELD} from "../common/Constants";
 
 const theme = {
     blue: {
@@ -67,6 +68,7 @@ function clickMe(button) {
     if (kanaMatches(character, question, button.state.isKatakana)) {
         console.log("Match!: " + character + "=" + question)
         incrementCounter();
+        localStorage.setItem(PREV_QUESTION_FIELD, localStorage.getItem(QUESTION_FIELD))
         button.state.solvedCallback();
     } else {
         console.log("Wrong: " + character + " != " + question)
