@@ -8,7 +8,8 @@ import KanaLoadModal from "./loader/Modal";
 import TranslateDirectionButton from "./translate_direction/TranslateDirectionButton";
 import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from './common/Constants'
 import {getUserRomajiSetKatakana, storeUserRomajiSetKatakana} from "./model/SettingsModel";
-
+import {BrowserView, MobileView} from 'react-device-detect';
+import './tile_group/TileGroup-mobile.css'
 
 class StateContainer extends React.Component {
 
@@ -84,64 +85,148 @@ class StateContainer extends React.Component {
     render() {
         return (
             <div className="StateContainer" id="outer-container">
-                <header className="App-header" id="page-wrap">
-                    <Sidebar editCallback={(filteredKana) => this.editCallback(filteredKana)}
-                             loadUserSetCallback={() => this.loadUserSetCallback()}
-                             saveUserSetCallback={() => this.saveUserSetCallback()}
-                             charsListRomaji={this.state.charsListRomaji}
-                             pageWrapId={'page-wrap'}
-                             outerContainerId={'outer-container'}
-                             direction={this.state.direction}/>
-                    <br/>
-                    <br/>
-                    <table className="Header-table">
-                        <tbody>
-                        <tr>
-                            <td align="right" style={{verticalAlign: 'bottom'}}>
-                                <TranslateDirectionButton
-                                    isKanaToRomaji={this.state.direction === KANA_TO_ROMAJI}
-                                    changeDirectionCallback={() => this.changeDirectionCallback()}/>
-                            </td>
-                            <td>
-                                <table className="Header-table">
-                                    <tbody>
-                                    <tr>
-                                        <td align="center" style={{verticalAlign: 'bottom'}}>
-                                            <Reset resetCallback={() => this.resetCallback()}/>
-                                        </td>
-                                        <td style={{verticalAlign: 'bottom'}}>
-                                            <Question direction={this.state.direction}
-                                                      charsListRomaji={this.state.charsListRomaji}
-                                                      wrongAnswers={this.state.wrongAnswers}
-                                                      isKanaToRomaji={this.state.direction === KANA_TO_ROMAJI}
-                                            />
-                                        </td>
-                                        <td style={{verticalAlign: 'bottom'}}>
-
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                            <td style={{verticalAlign: 'bottom'}}>
-                                <Counter/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <TileGroup charsListRomaji={this.state.charsListRomaji}
-                               wrongAnswers={this.state.wrongAnswers}
-                               solvedCallback={() => this.successCallback()}
-                               errorCallback={(e) => this.errorCallback(e)}
-                               isKatakana={this.state.direction === KANA_TO_ROMAJI}
-                    />
-                </header>
-
-                <KanaLoadModal/>
+                <BrowserView>
+                    {getDesktopView(this)}
+                </BrowserView>
+                <MobileView>
+                    {getMobileView(this)}
+                </MobileView>
             </div>
         )
     }
+}
+
+function getMobileView(stateContainer) {
+    return (
+        <div>
+            <header className="App-header-mobile" id="page-wrap">
+                <br/>
+                <table className="Header-table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            {getSidebar(stateContainer)}
+                        </td>
+                        <td align="center" style={{verticalAlign: 'bottom'}}>
+                            {getTranslateDirectionButton(stateContainer, true)}
+                        </td>
+                        <td align="center">
+                            {getResetButton(stateContainer)}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table className="Header-table">
+                    <tbody>
+                    <tr>
+                        <td align="center" style={{verticalAlign: 'bottom'}}>
+                        </td>
+                        <td style={{verticalAlign: 'bottom'}}>
+                            {getQuestion(stateContainer, "Question-mobile")}
+                        </td>
+                        <td style={{verticalAlign: 'bottom'}}>
+                            {getCounter()}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
+                {getTileGroup(stateContainer, "TileGroup-mobile")}
+            </header>
+
+            <KanaLoadModal/>
+        </div>
+    );
+}
+
+function getDesktopView(stateContainer) {
+    return (
+        <div>
+            <header className="App-header" id="page-wrap">
+                {getSidebar(stateContainer)}
+                <br/>
+                <table className="Header-table">
+                    <tbody>
+                    <tr>
+                        <td align="right" style={{verticalAlign: 'bottom'}}>
+                            {getTranslateDirectionButton(stateContainer, false)}
+                        </td>
+                        <td>
+                            <table className="Header-table">
+                                <tbody>
+                                <tr>
+                                    <td align="center" style={{verticalAlign: 'bottom'}}>
+                                        {getResetButton(stateContainer)}
+                                    </td>
+                                    <td style={{verticalAlign: 'bottom'}}>
+                                        {getQuestion(stateContainer, "Question")}
+                                    </td>
+                                    <td style={{verticalAlign: 'bottom'}}>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td style={{verticalAlign: 'bottom'}}>
+                            {getCounter()}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
+                {getTileGroup(stateContainer, "TileGroup")}
+            </header>
+
+            <KanaLoadModal/>
+        </div>
+    );
+}
+
+function getCounter() {
+    return (<Counter/>);
+}
+
+function getResetButton(stateContainer) {
+    return (<Reset resetCallback={() => stateContainer.resetCallback()}/>);
+}
+
+function getQuestion(stateContainer, className) {
+    return (<Question className={className}
+                      direction={stateContainer.state.direction}
+                      charsListRomaji={stateContainer.state.charsListRomaji}
+                      wrongAnswers={stateContainer.state.wrongAnswers}
+                      isKanaToRomaji={stateContainer.state.direction === KANA_TO_ROMAJI}/>
+    );
+}
+
+function getTranslateDirectionButton(stateContainer, isMobile) {
+    return (
+        <TranslateDirectionButton
+            isMobile={isMobile}
+            isKanaToRomaji={stateContainer.state.direction === KANA_TO_ROMAJI}
+            changeDirectionCallback={() => stateContainer.changeDirectionCallback()}/>
+    );
+}
+
+function getSidebar(stateContainer) {
+    return (<Sidebar editCallback={(filteredKana) => stateContainer.editCallback(filteredKana)}
+                     loadUserSetCallback={() => stateContainer.loadUserSetCallback()}
+                     saveUserSetCallback={() => stateContainer.saveUserSetCallback()}
+                     charsListRomaji={stateContainer.state.charsListRomaji}
+                     pageWrapId={'page-wrap'}
+                     outerContainerId={'outer-container'}
+                     direction={stateContainer.state.direction}/>
+    );
+}
+
+function getTileGroup(stateContainer, className) {
+    return (<TileGroup className={className}
+                       charsListRomaji={stateContainer.state.charsListRomaji}
+                       wrongAnswers={stateContainer.state.wrongAnswers}
+                       solvedCallback={() => stateContainer.successCallback()}
+                       errorCallback={(e) => stateContainer.errorCallback(e)}
+                       isKatakana={stateContainer.state.direction === KANA_TO_ROMAJI}/>
+    );
 }
 
 

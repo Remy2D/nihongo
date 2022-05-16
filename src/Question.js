@@ -12,10 +12,10 @@ function Question(props) {
         setRandomCharacterSeed(props.charsListRomaji);
     }
 
-    return prepareDiv(props.direction);
+    return prepareDiv(props.direction, props.className);
 }
 
-function prepareDiv(direction) {
+function prepareDiv(direction, className) {
     let character = localStorage.getItem(QUESTION_FIELD)
 
     let question = character
@@ -24,7 +24,7 @@ function prepareDiv(direction) {
     }
 
     return (
-        <div className="Question">{question ? question : " "}</div>
+        <div className={className}>{question ? question : " "}</div>
     )
 }
 

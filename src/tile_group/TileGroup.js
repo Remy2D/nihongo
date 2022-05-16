@@ -16,7 +16,7 @@ function TileGroup(props) {
 
     return (
         <React.StrictMode>
-            <div className="TileGroup">
+            <div className={props.className}>
                 {
                     charsList.map(line => mapToButton(
                         line,

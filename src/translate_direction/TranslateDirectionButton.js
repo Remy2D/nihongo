@@ -6,13 +6,16 @@ import './TranslateDirectionButton.css'
 function TranslateDirectionButton(props) {
     let icon = props.isKanaToRomaji ? faCircleRight : faCircleLeft
 
+    let kanaSideText = props.isMobile ? "カ" : "片仮名"
+    let romajiSideText = props.isMobile ? "KA" : "Romaji"
+
     return (
         <div>
-            片仮名
+            {kanaSideText}
             <button className="TranslateDirectionButton" onClick={props.changeDirectionCallback}>
                 <FontAwesomeIcon className="TranslateDirectionButtonIcon" icon={icon}/>
             </button>
-            Romaji
+            {romajiSideText}
         </div>
     );
 }

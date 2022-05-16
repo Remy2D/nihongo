@@ -5,6 +5,7 @@ import React from "react";
 import {kanaMatches} from "../model/KatakanaModel.js";
 import {incrementCounter, resetCounter} from "../Counter.js";
 import {PREV_QUESTION_FIELD, QUESTION_FIELD} from "../common/Constants";
+import {isMobile} from 'react-device-detect';
 
 const theme = {
     blue: {
@@ -63,7 +64,7 @@ class Tile extends React.Component {
 
 function clickMe(button) {
     let character = button.state.character
-    let question = document.getElementsByClassName('Question')[0].textContent
+    let question = lazyReadCurrentQuestion()
 
     if (kanaMatches(character, question, button.state.isKatakana)) {
         console.log("Match!: " + character + "=" + question)
@@ -75,6 +76,12 @@ function clickMe(button) {
         resetCounter();
         button.state.errorCallback(character);
     }
+}
+
+function lazyReadCurrentQuestion() {
+    let questionElement = isMobile ? 'Question-mobile' : 'Question'
+
+    return document.getElementsByClassName(questionElement)[0].textContent
 }
 
 
