@@ -5,12 +5,18 @@ import KanaCheckbox from "./KanaCheckbox";
 import {getKatakanaRomajiSet} from "../model/KatakanaModel";
 
 function Sidebar(props) {
-    return renderSidebar(props.charsListRomaji, props.direction, props.editCallback)
+    return renderSidebar(
+        props.charsListRomaji,
+        props.direction,
+        props.editCallback,
+        props.saveUserSetCallback,
+        props.loadUserSetCallback
+    );
 }
 
-function renderSidebar(selectedCharsList, direction, editCallback) {
-    let chars = [...getKatakanaRomajiSet()]
-    let columns = splitToColumns(chars, 3)
+function renderSidebar(selectedCharsList, direction, editCallback, saveUserSetCallback, loadUserSetCallback) {
+    let chars = [...getKatakanaRomajiSet()];
+    let columns = splitToColumns(chars, 3);
 
     return (
         <Menu>
@@ -60,26 +66,48 @@ function renderSidebar(selectedCharsList, direction, editCallback) {
                     }))}
                 </div>
             </div>
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <td width="50%">
+                        <button className="SaveUserSetButton"
+                                onClick={() => {
+                                    saveUserSetCallback()
+                                }}>
+                            Save
+                        </button>
+                    </td>
+                    <td width="50%">
+                        <button className="LoadUserSetButton"
+                                onClick={() => {
+                                    loadUserSetCallback()
+                                }}>
+                            Load
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </Menu>
     );
 }
 
 function handleChange(checkbox, charsListRomaji, direction, editCallback) {
-    let checked = checkbox.props.checked
-    let romaji = checkbox.props.romaji
+    let checked = checkbox.props.checked;
+    let romaji = checkbox.props.romaji;
 
-    let filteredRomaji
+    let filteredRomaji;
     if (!checked) {
-        filteredRomaji = [...charsListRomaji, romaji]
+        filteredRomaji = [...charsListRomaji, romaji];
     } else {
-        let index = charsListRomaji.indexOf(romaji)
+        let index = charsListRomaji.indexOf(romaji);
         if (index >= 0) {
-            filteredRomaji = [...charsListRomaji]
-            filteredRomaji.splice(index, 1)
+            filteredRomaji = [...charsListRomaji];
+            filteredRomaji.splice(index, 1);
         }
     }
 
-    editCallback(filteredRomaji)
+    editCallback(filteredRomaji);
 }
 
 function splitToColumns(array, parts) {

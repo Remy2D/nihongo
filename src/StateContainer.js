@@ -7,6 +7,7 @@ import TileGroup from "./tile_group/TileGroup";
 import KanaLoadModal from "./loader/Modal";
 import TranslateDirectionButton from "./translate_direction/TranslateDirectionButton";
 import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from './common/Constants'
+import {getUserRomajiSetKatakana, storeUserRomajiSetKatakana} from "./model/SettingsModel";
 
 
 class StateContainer extends React.Component {
@@ -18,19 +19,19 @@ class StateContainer extends React.Component {
             charsListRomaji: props.charsListRomaji,
             wrongAnswers: [],
             direction: KANA_TO_ROMAJI
-        }
+        };
     }
 
     editCallback(filteredRomaji) {
         this.setState({
             charsListRomaji: filteredRomaji
-        })
+        });
     }
 
     successCallback() {
         this.setState({
             wrongAnswers: []
-        })
+        });
     }
 
     errorCallback(wrongAnswer) {
@@ -39,14 +40,27 @@ class StateContainer extends React.Component {
             return {
                 wrongAnswers: wrongAnswers
             }
-        })
+        });
     }
 
     resetCallback() {
         resetCounter()
         this.setState({
             wrongAnswers: []
-        })
+        });
+    }
+
+    saveUserSetCallback() {
+        console.log("Saved user katakana list: " + this.state.charsListRomaji)
+        storeUserRomajiSetKatakana(this.state.charsListRomaji);
+    }
+
+    loadUserSetCallback() {
+        let xD = getUserRomajiSetKatakana();
+        console.log("Load user katakana list: " + xD)
+        this.setState({
+            charsListRomaji: xD
+        });
     }
 
     changeDirectionCallback() {
@@ -57,12 +71,12 @@ class StateContainer extends React.Component {
                 return {
                     wrongAnswers: [],
                     direction: ROMAJI_TO_KANA
-                }
+                };
             } else {
                 return {
                     wrongAnswers: [],
                     direction: KANA_TO_ROMAJI
-                }
+                };
             }
         })
     }
@@ -72,6 +86,8 @@ class StateContainer extends React.Component {
             <div className="StateContainer" id="outer-container">
                 <header className="App-header" id="page-wrap">
                     <Sidebar editCallback={(filteredKana) => this.editCallback(filteredKana)}
+                             loadUserSetCallback={() => this.loadUserSetCallback()}
+                             saveUserSetCallback={() => this.saveUserSetCallback()}
                              charsListRomaji={this.state.charsListRomaji}
                              pageWrapId={'page-wrap'}
                              outerContainerId={'outer-container'}
