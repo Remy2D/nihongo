@@ -10,9 +10,9 @@ class KanaCheckbox extends React.Component {
                     className="KanaCheckboxInput"
                     type="checkbox"
                     checked={this.props.checked}
-                    onChange={() => this.props.handleChange(this.props.kana)}
+                    onChange={() => this.props.handleChange(this)}
                 />
-                {this.props.kana}
+                {this.props.romaji}
             </label>
         );
     }

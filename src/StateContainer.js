@@ -6,7 +6,6 @@ import Counter, {resetCounter} from "./Counter";
 import TileGroup from "./tile_group/TileGroup";
 import KanaLoadModal from "./loader/Modal";
 import TranslateDirectionButton from "./translate_direction/TranslateDirectionButton";
-import {translateAllowedCharacters} from "./model/KatakanaModel";
 import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from './common/Constants'
 
 
@@ -16,15 +15,15 @@ class StateContainer extends React.Component {
         super(props);
 
         this.state = {
-            charsList: props.charsList,
+            charsListRomaji: props.charsListRomaji,
             wrongAnswers: [],
             direction: KANA_TO_ROMAJI
         }
     }
 
-    editCallback(filteredKana) {
+    editCallback(filteredRomaji) {
         this.setState({
-            charsList: filteredKana
+            charsListRomaji: filteredRomaji
         })
     }
 
@@ -57,13 +56,11 @@ class StateContainer extends React.Component {
             if (lastDirection === KANA_TO_ROMAJI) {
                 return {
                     wrongAnswers: [],
-                    charsList: translateAllowedCharacters(prevState.charsList, KANA_TO_ROMAJI),
                     direction: ROMAJI_TO_KANA
                 }
             } else {
                 return {
                     wrongAnswers: [],
-                    charsList: translateAllowedCharacters(prevState.charsList, ROMAJI_TO_KANA),
                     direction: KANA_TO_ROMAJI
                 }
             }
@@ -75,6 +72,7 @@ class StateContainer extends React.Component {
             <div className="StateContainer" id="outer-container">
                 <header className="App-header" id="page-wrap">
                     <Sidebar editCallback={(filteredKana) => this.editCallback(filteredKana)}
+                             charsListRomaji={this.state.charsListRomaji}
                              pageWrapId={'page-wrap'}
                              outerContainerId={'outer-container'}
                              direction={this.state.direction}/>
@@ -97,7 +95,7 @@ class StateContainer extends React.Component {
                                         </td>
                                         <td style={{verticalAlign: 'bottom'}}>
                                             <Question direction={this.state.direction}
-                                                      charsList={this.state.charsList}
+                                                      charsListRomaji={this.state.charsListRomaji}
                                                       wrongAnswers={this.state.wrongAnswers}
                                                       isKanaToRomaji={this.state.direction === KANA_TO_ROMAJI}
                                             />
@@ -116,7 +114,7 @@ class StateContainer extends React.Component {
                         </tbody>
                     </table>
 
-                    <TileGroup charsList={this.state.charsList}
+                    <TileGroup charsListRomaji={this.state.charsListRomaji}
                                wrongAnswers={this.state.wrongAnswers}
                                solvedCallback={() => this.successCallback()}
                                errorCallback={(e) => this.errorCallback(e)}

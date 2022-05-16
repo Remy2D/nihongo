@@ -2,13 +2,23 @@ import './TileGroup.css';
 
 import React from "react";
 import Tile from "./Tile";
+import {ROMAJI_TO_KANA} from "../common/Constants";
+import {translateAllowedCharacters} from "../model/KatakanaModel";
 
 function TileGroup(props) {
+    let charsList
+
+    if (props.isKatakana) {
+        charsList = translateAllowedCharacters(props.charsListRomaji, ROMAJI_TO_KANA)
+    } else {
+        charsList = props.charsListRomaji
+    }
+
     return (
         <React.StrictMode>
             <div className="TileGroup">
                 {
-                    props.charsList.map(line => mapToButton(
+                    charsList.map(line => mapToButton(
                         line,
                         props.wrongAnswers,
                         props.solvedCallback,
