@@ -18,15 +18,15 @@ export function getCurrentKanaRomajiSet() {
     return getCurrentKanaPairs().map(entry => entry[1])
 }
 
-function getCurrentKanaKanaSet() {
+function getCurrentKanaSet() {
     return getCurrentKanaPairs().map(entry => entry[0])
 }
 
 export function kanaMatches(userKana, question, isKatakana) {
     if (isKatakana) {
-        return doesKanaMatch(userKana, question, getCurrentKanaRomajiSet(), getCurrentKanaKanaSet())
+        return doesKanaMatch(userKana, question, getCurrentKanaRomajiSet(), getCurrentKanaSet())
     } else {
-        return doesKanaMatch(userKana, question, getCurrentKanaKanaSet(), getCurrentKanaRomajiSet())
+        return doesKanaMatch(userKana, question, getCurrentKanaSet(), getCurrentKanaRomajiSet())
     }
 }
 
@@ -62,7 +62,7 @@ export function translateAllowedCharacters(charsList, direction) {
 
 function getCurrentKanaPairs() {
     let kanas
-    kanas = getCurrentKana() === KATAKANA_FIELD ? getKatakana() : getHiragana()
+    kanas = getCurrentKana() === KATAKANA_PATH ? getKatakana() : getHiragana()
     return kanas.map(e => e.split(","))
 }
 
