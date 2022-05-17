@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import '../tile_group/TileGroup-mobile.css'
 import Nihongo from "./Nihongo";
 import StateContainer from "../StateContainer";
-import {getKatakanaRomajiSet} from "../model/KatakanaModel";
+import {getCurrentKanaRomajiSet} from "../model/KatakanaModel";
 import Home from "./Home";
 
 
@@ -15,10 +15,10 @@ function App() {
                     <Route index element={<Home/>}/>
 
                     <Route path="/katakana"
-                           element={<StateContainer charsListRomaji={getKatakanaRomajiSet()}/>}
+                           element={<StateContainer charsListRomaji={getCurrentKanaRomajiSet()}/>}
                     />
                     <Route path="/hiragana"
-                           element={<StateContainer charsListRomaji={getKatakanaRomajiSet()}/>}
+                           element={<StateContainer charsListRomaji={getCurrentKanaRomajiSet()}/>}
                     />
                 </Route>
             </Routes>

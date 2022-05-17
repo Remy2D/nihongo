@@ -1,14 +1,14 @@
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Modal.css";
-import {isKatakanaLoaded} from "./Loader";
 import {Spinner} from "react-bootstrap";
+import * as KanaModel from "../model/KatakanaModel";
 
 function KanaLoadModal() {
     return (
         <Modal
             className="KanaLoadModal"
-            show={!isKatakanaLoaded()}
+            show={!KanaModel.hasHiragana() || !KanaModel.hasKatakana()}
             backdrop="static"
             keyboard={false}
             size="lg"
@@ -17,7 +17,7 @@ function KanaLoadModal() {
         >
             <Modal.Body className="KanaLoadModalBody">
                 <div className="KanaLoadModalBodyText">
-                    <div> Loading katakana</div>
+                    <div>Loading alphabets</div>
                     <Spinner animation="grow" role="status"/>
                 </div>
             </Modal.Body>

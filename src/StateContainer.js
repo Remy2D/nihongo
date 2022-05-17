@@ -7,7 +7,7 @@ import TileGroup from "./tile_group/TileGroup";
 import KanaLoadModal from "./loader/Modal";
 import TranslateDirectionButton from "./translate_direction/TranslateDirectionButton";
 import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from './common/Constants'
-import {getUserRomajiSetKatakana, storeUserRomajiSetKatakana} from "./model/SettingsModel";
+import {getUserRomajiSet, storeUserRomajiSet} from "./model/SettingsModel";
 import {BrowserView, MobileView} from 'react-device-detect';
 import './tile_group/TileGroup-mobile.css'
 import BackButton from "./BackButton";
@@ -53,15 +53,15 @@ class StateContainer extends React.Component {
     }
 
     saveUserSetCallback() {
-        console.log("Saved user katakana list: " + this.state.charsListRomaji)
-        storeUserRomajiSetKatakana(this.state.charsListRomaji);
+        console.log("Saved user kana list: " + this.state.charsListRomaji)
+        storeUserRomajiSet(this.state.charsListRomaji);
     }
 
     loadUserSetCallback() {
-        let xD = getUserRomajiSetKatakana();
-        console.log("Load user katakana list: " + xD)
+        let userSet = getUserRomajiSet();
+        console.log("Load user kana list: " + userSet)
         this.setState({
-            charsListRomaji: xD
+            charsListRomaji: userSet
         });
     }
 

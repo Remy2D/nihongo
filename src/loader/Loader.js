@@ -1,30 +1,36 @@
 import katakanaSrc from "../model/katakana.txt";
+import hiraganaSrc from "../model/hiragana.txt";
 import * as KanaModel from '../model/KatakanaModel.js'
 
 
-export function clearKatakana() {
-    return KanaModel.clearKatakana()
-}
-
-export function isKatakanaLoaded() {
-    return KanaModel.getKatakanaRomajiSet() != null &&
-        KanaModel.getKatakanaRomajiSet().length > 0 &&
-        KanaModel.getKatakanaKanaSet() != null &&
-        KanaModel.getKatakanaKanaSet().length > 0
-}
-
 export function loadKatakana(dialogCloseCallback) {
-    if (isKatakanaLoaded()) {
+    if (KanaModel.hasHiragana() && KanaModel.hasKatakana()) {
         console.log("Katakana already loaded");
         return;
     }
 
     console.log("Loading Katakana");
+    fetchKanas(dialogCloseCallback);
+}
 
+function fetchKanas(dialogCloseCallback) {
+    fetchKatakana(dialogCloseCallback);
+}
+
+function fetchKatakana(dialogCloseCallback) {
     fetch(katakanaSrc)
         .then(r => r.text())
         .then(text => {
             KanaModel.storeKatakana(text)
+        })
+        .then(() => fetchHiragana(dialogCloseCallback));
+}
+
+function fetchHiragana(dialogCloseCallback) {
+    fetch(hiraganaSrc)
+        .then(r => r.text())
+        .then(text => {
+            KanaModel.storeHiragana(text)
         })
         .then(() => dialogCloseCallback());
 }

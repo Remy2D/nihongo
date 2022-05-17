@@ -2,7 +2,7 @@ import React from 'react';
 import {slide as Menu} from 'react-burger-menu';
 import './Sidebar.css';
 import KanaCheckbox from "./KanaCheckbox";
-import {getKatakanaRomajiSet} from "../model/KatakanaModel";
+import {getCurrentKanaRomajiSet} from "../model/KatakanaModel";
 
 function Sidebar(props) {
     return renderSidebar(
@@ -15,7 +15,7 @@ function Sidebar(props) {
 }
 
 function renderSidebar(selectedCharsList, direction, editCallback, saveUserSetCallback, loadUserSetCallback) {
-    let chars = [...getKatakanaRomajiSet()];
+    let chars = [...getCurrentKanaRomajiSet()];
     let columns = splitToColumns(chars, 3);
 
     return (
@@ -26,7 +26,7 @@ function renderSidebar(selectedCharsList, direction, editCallback, saveUserSetCa
                     <td width="50%">
                         <button className="AllButton"
                                 onClick={() => {
-                                    editCallback(getKatakanaRomajiSet())
+                                    editCallback(getCurrentKanaRomajiSet())
                                 }}>
                             All
                         </button>
