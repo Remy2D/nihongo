@@ -4,9 +4,8 @@ import './index.css';
 import './tile_group/TileGroup.css';
 import reportWebVitals from './reportWebVitals';
 import {loadKatakana} from "./loader/Loader";
-import StateContainer from "./StateContainer";
-import {getKatakanaRomajiSet} from "./model/KatakanaModel";
 import {resetCounter} from "./Counter";
+import App from "./home/App";
 
 function onLoad() {
     loadKatakana(reload);
@@ -19,7 +18,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <React.StrictMode>
-        <StateContainer charsListRomaji={getKatakanaRomajiSet()}/>
+        <App/>
     </React.StrictMode>
 );
 

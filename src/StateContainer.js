@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "./sidebar/Sidebar";
-import Reset from "./Reset";
+import ResetButton from "./ResetButton";
 import Question from "./Question";
 import Counter, {resetCounter} from "./Counter";
 import TileGroup from "./tile_group/TileGroup";
@@ -10,6 +10,7 @@ import {KANA_TO_ROMAJI, ROMAJI_TO_KANA} from './common/Constants'
 import {getUserRomajiSetKatakana, storeUserRomajiSetKatakana} from "./model/SettingsModel";
 import {BrowserView, MobileView} from 'react-device-detect';
 import './tile_group/TileGroup-mobile.css'
+import BackButton from "./BackButton";
 
 class StateContainer extends React.Component {
 
@@ -85,6 +86,7 @@ class StateContainer extends React.Component {
     render() {
         return (
             <div className="StateContainer" id="outer-container">
+                <title>xDD</title>
                 <BrowserView>
                     {getDesktopView(this)}
                 </BrowserView>
@@ -111,7 +113,6 @@ function getMobileView(stateContainer) {
                             {getTranslateDirectionButton(stateContainer, true)}
                         </td>
                         <td align="center">
-                            {getResetButton(stateContainer)}
                         </td>
                     </tr>
                     </tbody>
@@ -120,11 +121,12 @@ function getMobileView(stateContainer) {
                     <tbody>
                     <tr>
                         <td align="center" style={{verticalAlign: 'bottom'}}>
+                            {getResetButton(stateContainer)}
                         </td>
                         <td style={{verticalAlign: 'bottom'}}>
                             {getQuestion(stateContainer, "Question-mobile")}
                         </td>
-                        <td style={{verticalAlign: 'bottom'}}>
+                        <td align="left" style={{verticalAlign: 'bottom'}}>
                             {getCounter()}
                         </td>
                     </tr>
@@ -156,19 +158,32 @@ function getDesktopView(stateContainer) {
                                 <tbody>
                                 <tr>
                                     <td align="center" style={{verticalAlign: 'bottom'}}>
-                                        {getResetButton(stateContainer)}
                                     </td>
                                     <td style={{verticalAlign: 'bottom'}}>
                                         {getQuestion(stateContainer, "Question")}
                                     </td>
                                     <td style={{verticalAlign: 'bottom'}}>
+                                        {getCounter()}
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </td>
                         <td style={{verticalAlign: 'bottom'}}>
-                            {getCounter()}
+                            <table className="Header-table">
+                                <tbody>
+                                <tr>
+                                    <td align="right" style={{verticalAlign: 'bottom'}}>
+                                        {getResetButton(stateContainer)}
+                                    </td>
+                                    <td align="center" style={{verticalAlign: 'bottom'}}>
+                                        {getBackButton()}
+                                    </td>
+                                    <td style={{verticalAlign: 'bottom'}}>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </td>
                     </tr>
                     </tbody>
@@ -186,8 +201,12 @@ function getCounter() {
     return (<Counter/>);
 }
 
+function getBackButton() {
+    return (<BackButton/>);
+}
+
 function getResetButton(stateContainer) {
-    return (<Reset resetCallback={() => stateContainer.resetCallback()}/>);
+    return (<ResetButton resetCallback={() => stateContainer.resetCallback()}/>);
 }
 
 function getQuestion(stateContainer, className) {

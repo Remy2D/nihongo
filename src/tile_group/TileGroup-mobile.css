@@ -5,17 +5,29 @@
 
 .Question-mobile {
     text-align: center;
-    font-size: calc(10px + 10vmin);
+    font-size: calc(10px + 15vmin);
     color: white;
 }
 
 .App-header-mobile {
     background-color: #282c34;
     min-height: 100vh;
-    min-width: 100vw;
+    /*min-width: 100vw;*/
+    width: 100%;
+    /*height: 100%;*/
     align-items: center;
     vertical-align: top;
     font-size: calc(10px + 2vmin);
     color: white;
     display: inline-block;
+}
+
+.Nihongo {
+    width: 100%;
+    height: 100%;
+}
+
+.App {
+    width: 100%;
+    height: 100%;
 }

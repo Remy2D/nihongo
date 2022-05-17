@@ -10,7 +10,7 @@
 }
 
 .Counter {
-    text-align: left;
+    text-align: center;
     min-width: 20vh;
     font-size: calc(10px + 2vmin);
     color: white;

@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button'
 import React from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRepeat} from '@fortawesome/free-solid-svg-icons'
-import './Reset.css';
+import './ResetButton.css';
 
-function Reset(props) {
+function ResetButton(props) {
     return (
-        <Button className="Reset" variant="warning"
+        <Button className="ResetButton" variant="warning"
                 onClick={() => {
                     props.resetCallback()
                 }}>
@@ -15,4 +15,4 @@ function Reset(props) {
     )
 }
 
-export default Reset;
+export default ResetButton;
