@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 function BackButton() {
     return (
         <Button className="BackButton" variant="warning">
-            <Link to="/">
+            <Link to="/nihongo">
                 <FontAwesomeIcon className="BackButtonIcon" icon={faArrowLeft}/>
             </Link>
         </Button>

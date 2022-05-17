@@ -45,13 +45,13 @@ function getMobileView() {
                     <tr>
                         <td/>
                         <td style={{textAlign: 'right'}}>
-                            <Link to="/hiragana">
+                            <Link to="/nihongo/hiragana">
                                 <button className="KanaButton-mobile">ひ</button>
                             </Link>
                         </td>
                         <td/>
                         <td>
-                            <Link to="/katakana">
+                            <Link to="/nihongo/katakana">
                                 <button className="KanaButton-mobile">カ</button>
                             </Link>
                         </td>
@@ -99,13 +99,13 @@ function getDesktopView() {
                         <td/>
                         <td/>
                         <td style={{textAlign: 'right'}}>
-                            <Link to="/hiragana">
+                            <Link to="/nihongo/hiragana">
                                 <button className="KanaButton">ひらがな</button>
                             </Link>
                         </td>
                         <td/>
                         <td>
-                            <Link to="/katakana">
+                            <Link to="/nihongo/katakana">
                                 <button className="KanaButton">カタカナ</button>
                             </Link>
                         </td>

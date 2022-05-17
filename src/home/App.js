@@ -11,13 +11,13 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Nihongo/>}>
+                <Route path="/nihongo" element={<Nihongo/>}>
                     <Route index element={<Home/>}/>
 
-                    <Route path="/katakana"
+                    <Route path="/nihongo/katakana"
                            element={<StateContainer charsListRomaji={getCurrentKanaRomajiSet()}/>}
                     />
-                    <Route path="/hiragana"
+                    <Route path="/nihongo/hiragana"
                            element={<StateContainer charsListRomaji={getCurrentKanaRomajiSet()}/>}
                     />
                 </Route>

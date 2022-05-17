@@ -93,11 +93,11 @@ function getKana(field) {
 }
 
 export function getCurrentKana() {
-    if (window.location.pathname === "/katakana") {
+    if (window.location.pathname === "/nihongo/katakana") {
         return KATAKANA_PATH;
     }
 
-    if (window.location.pathname === "/hiragana") {
+    if (window.location.pathname === "/nihongo/hiragana") {
         return HIRAGANA_PATH;
     }
 
